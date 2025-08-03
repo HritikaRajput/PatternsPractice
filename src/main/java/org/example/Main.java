@@ -4,14 +4,16 @@ import org.example.patterns.abstractfactory.Region;
 import org.example.patterns.abstractfactory.SmartDeviceFactory;
 import org.example.patterns.abstractfactory.SmartDeviceFactoryConfigurer;
 import org.example.patterns.abstractfactory.interfaces.SmartDoorLock;
-import org.example.patterns.abstractfactory.interfaces.SmartThermostat;
-import org.example.patterns.decorator.decorators.BasePizza;
-import org.example.patterns.decorator.decorators.Farmhouse;
-import org.example.patterns.decorator.decorators.Margherita;
-import org.example.patterns.decorator.decorators.decorators.Jalapenos;
-import org.example.patterns.decorator.decorators.decorators.Olives;
-import org.example.patterns.factory.Shape;
-import org.example.patterns.factory.ShapeFactory;
+import org.example.patterns.adapter.Client;
+import org.example.patterns.adapter.adaptee.ConcreteAdaptee;
+import org.example.patterns.adapter.adaptee.adapter.Aparter;
+import org.example.patterns.adapter.adaptee.adapter.ConcreteAdapter;
+import org.example.patterns.builder.AccountsEmployeeBuilder;
+import org.example.patterns.builder.Director;
+import org.example.patterns.builder.Employee;
+import org.example.patterns.singleton.Impl1_EagerSingleton;
+import org.example.patterns.singleton.Impl2_LazySingleton;
+import org.example.patterns.singleton.Impl3_SynchronizedSingleton;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -42,10 +44,28 @@ public class Main {
 
 
         // Abstract Factory Pattern
-        SmartDeviceFactoryConfigurer smartDeviceFactoryConfigurer = new SmartDeviceFactoryConfigurer();
-        SmartDeviceFactory smartDeviceFactory = smartDeviceFactoryConfigurer.getSmartDeviceFactory(Region.US);
-        SmartDoorLock smartDoorLock = smartDeviceFactory.createDoorLock();
-        System.out.println(smartDoorLock.getSpecs());
+//        SmartDeviceFactoryConfigurer smartDeviceFactoryConfigurer = new SmartDeviceFactoryConfigurer();
+//        SmartDeviceFactory smartDeviceFactory = smartDeviceFactoryConfigurer.getSmartDeviceFactory(Region.US);
+//        SmartDoorLock smartDoorLock = smartDeviceFactory.createDoorLock();
+//        System.out.println(smartDoorLock.getSpecs());
+
+
+        // Singleton
+//        Impl1_EagerSingleton eagerSingleton = Impl1_EagerSingleton.getSingleton();
+//        Impl2_LazySingleton lazySingleTon = Impl2_LazySingleton.getSingleton();
+//
+//        Impl3_SynchronizedSingleton singleton = Impl3_SynchronizedSingleton.getSingleton();
+//
+
+
+        // Builder
+//        Director dir = new Director(new AccountsEmployeeBuilder());
+//        Employee em = dir.run();
+//        System.out.println(em.toString());
+
+        //Ada[ter
+//        ConcreteAdapter concreteAdapter  = new ConcreteAdapter(new ConcreteAdaptee());
+//        Client client = new Client(concreteAdapter);
 
 
 
