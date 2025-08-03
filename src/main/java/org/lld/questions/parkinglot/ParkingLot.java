@@ -44,6 +44,7 @@ public class ParkingLot {
     public synchronized double unparkVehicle(Vehicle vehicle) throws Exception {
         if(this.getActiveTicket.get(vehicle.getLicense()) != null) {
             ParkingTicket ticket = this.getActiveTicket.get(vehicle.getLicense());
+            this.getActiveTicket.remove(vehicle.getLicense());
             ticket.setExitTime();
 
             ticket.getParkingSpot().unparkVehicle();
