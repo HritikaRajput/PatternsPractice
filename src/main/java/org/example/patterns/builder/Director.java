@@ -9,6 +9,7 @@ public class Director {
 
    public Employee run () {
         Employee employee = employeeBuilder.setName("abcd").setAge(27).setAddress("springField")
+                .setDepartment()
                 .setPhone("gwfdshdtesrw").build();
        return employee;
     }
