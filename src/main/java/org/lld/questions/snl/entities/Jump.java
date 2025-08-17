@@ -1,17 +1,20 @@
 package org.lld.questions.snl.entities;
 
-public class Ladder {
+public abstract class Jump {
     private final int startPos;
     private final int endPos;
+    private final String type;
 
-    public Ladder(int start, int end) {
-        this.startPos =start;
+    public Jump(int start, int end, String type) {
+        this.startPos = start;
         this.endPos = end;
+        this.type = type;
     }
 
     public int getEndPos() {
         return endPos;
     }
+
     public int getStartPos() {
         return startPos;
     }

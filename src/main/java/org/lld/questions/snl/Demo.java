@@ -7,9 +7,9 @@ import java.util.List;
 
 public class Demo {
     public static void main(String[] args) throws Exception {
-        List<ConcretePlayer> players = new ArrayList<>();
-        players.add(new ConcretePlayer("hritika",0));
-        players.add(new ConcretePlayer("goochi",1));
+        List<Player> players = new ArrayList<>();
+        players.add(PlayerFactory.getPlayer("normal", "hritika", 0));
+        players.add(PlayerFactory.getPlayer("normal", "goochi", 1));
 
 
         List<Snakes> list = new ArrayList<>();
@@ -24,10 +24,13 @@ public class Demo {
         ladders.add(new Ladder(38,78));
 
 
-        Board board = new Board(10, list, ladders);
+        Board board = new Board(10, list, ladders, new SixSidedDice());
 
-        Game game = new Game(players, board);
-        game.start();
+        List<GameRule> gameRules = new ArrayList<>();
+        gameRules.add(new SnakeRule());
+        gameRules.add(new LadderRule());
+
+        Game game = Game.getInstance(players, board, gameRules);
 
         game.roll();
 

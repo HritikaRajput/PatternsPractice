@@ -15,13 +15,12 @@ public class ConcretePlayer implements Player{
         return "normal";
     }
 
-    public Player getPlayer(int id) {
-        return this;
-    }
-
+    @Override
     public int getId() {
         return this.id;
     }
+
+    @Override
     public String getName() {
         return this.name;
     }

@@ -9,11 +9,11 @@ public class Snakes {
         this.endPos = end;
     }
 
-    public int getStartPos(int end) {
-        return startPos;
-    }
-
     public int getEndPos() {
         return endPos;
+    }
+
+    public int getStartPos() {
+        return startPos;
     }
 }

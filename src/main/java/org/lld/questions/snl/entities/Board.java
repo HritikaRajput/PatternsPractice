@@ -4,23 +4,28 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Board {
-    private final int size;
-    private final Set<Snakes> snakes;
-    private final Set<Ladder> ladders;
+    private final Map<Integer, Integer> snakes;
+    private final Map<Integer, Integer> ladders;
     private final Map<Integer, Integer> playerPositions = new HashMap<>();
     private final int winningPos;
-    private final int dice;
+    private final Dice dice;
 
     public Board(int n, List<Snakes> snakes, List<Ladder> ladders) {
-        this.size = n * n;
         this.winningPos = n*n;
-        this.snakes = new HashSet<>(snakes);
-        this.ladders = new HashSet<>(ladders);
-        this.dice = 6;
+        this.snakes = snakes.stream().collect(Collectors.toMap(Snakes::getEndPos, Snakes::getStartPos));
+        this.ladders = ladders.stream().collect(Collectors.toMap(Ladder::getStartPos, Ladder::getEndPos));
+        this.dice = new SixSidedDice(); // Default to SixSidedDice
+    }
+
+    public Board(int n, List<Snakes> snakes, List<Ladder> ladders, Dice dice) {
+        this.winningPos = n*n;
+        this.snakes = snakes.stream().collect(Collectors.toMap(Snakes::getEndPos, Snakes::getStartPos));
+        this.ladders = ladders.stream().collect(Collectors.toMap(Ladder::getStartPos, Ladder::getEndPos));
+        this.dice = dice;
     }
 
     public int rollDice() {
-        return (int)(Math.random() * dice);
+        return dice.roll();
     }
 
     public synchronized int getPlayerPosition(int id) {
@@ -32,16 +37,11 @@ public class Board {
     }
 
     public Set<Integer> blockedPos() {
-        return this.snakes.stream().map(snakes1 -> snakes1.getEndPos()).collect(Collectors.toSet());
+        return this.snakes.keySet();
     }
 
     public Integer getNewPositionAfterBite(int end) {
-        for(Snakes snakes1: snakes) {
-            if(snakes1.getEndPos() == end) {
-                return snakes1.getStartPos(end);
-            }
-        }
-        return -1;
+        return this.snakes.getOrDefault(end, -1);
     }
 
     public int getWinningPos() {
@@ -49,16 +49,11 @@ public class Board {
     }
 
     public int getNewPositionAfterLadder(int pos) {
-        for(Ladder ladder: ladders) {
-            if(ladder.getStartPos() == pos) {
-                return ladder.getEndPos();
-            }
-        }
-        return -1;
+        return this.ladders.getOrDefault(pos, -1);
     }
 
     public Set<Integer> getLadderPos() {
-        return this.ladders.stream().map(ladder -> ladder.getStartPos()).collect(Collectors.toSet());
+        return this.ladders.keySet();
     }
 
 }
